@@ -27,7 +27,7 @@ class TodoListViewController: UIViewController, UITableViewDelegate, UITableView
     self.tblTasks.delegate = self
     self.tblTasks.dataSource = self
     self.tblTasks.rowHeight = UITableViewAutomaticDimension
-    self.tblTasks.estimatedRowHeight = 80
+    self.tblTasks.estimatedRowHeight = 101
 
     configureDatabase()
     initializeList()
@@ -128,7 +128,27 @@ class TodoListViewController: UIViewController, UITableViewDelegate, UITableView
     cell.lblDescription.text = task.taskDescription
     cell.lblDescription.sizeToFit()
 
+    if task.isCompleted {
+      cell.lblCompleted.text = "Completed"
+      cell.lblCompleted.textColor = UIColor.green
+      cell.btnDone.setTitle("Not Done", for: .normal)
+    } else {
+      cell.lblCompleted.text = "Not Completed"
+      cell.lblCompleted.textColor = UIColor.red
+      cell.btnDone.setTitle("Done", for: .normal)
+    }
+
+    cell.btnDone.tag = indexPath.row
+    cell.btnDone.addTarget(self, action: #selector(TodoListViewController.doneButtonClicked(_:)),
+                           for: .touchUpInside)
+
     return cell
+  }
+
+  func doneButtonClicked(_ sender: UIButton) {
+    let task = self.taskList[sender.tag]
+    let isCompleted = !task.isCompleted
+    task.ref?.updateChildValues(["isCompleted": isCompleted])
   }
 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,

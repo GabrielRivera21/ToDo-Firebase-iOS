@@ -13,12 +13,24 @@ import Firebase
 
 class RegisterViewController: UIViewController {
 
+  var dbRef: FIRDatabaseReference!
+  var scrollUtil: ScrollUtils!
+
+  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet weak var contentView: UIView!
+
   @IBOutlet weak var txtEmail: UITextField!
   @IBOutlet weak var txtPassword: UITextField!
   @IBOutlet weak var txtConfirmPassword: UITextField!
 
   @IBOutlet weak var btnRegister: UIButton!
   @IBOutlet weak var btnBack: UIButton!
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    dbRef = FIRDatabase.database().reference()
+    self.scrollUtil = ScrollUtils.init(self, scrollView: self.scrollView)
+  }
 
   @IBAction func register(_ sender: Any) {
     let password = txtPassword.text!
@@ -36,6 +48,7 @@ class RegisterViewController: UIViewController {
         AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
         return
       }
+
       AppUtils.showSuccessMessage(controller: self, message: "User \(email) has been created")
       self.dismiss(animated: true)
     }

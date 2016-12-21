@@ -10,16 +10,54 @@ import Foundation
 import UIKit
 
 import Firebase
+import GoogleSignIn
 
+class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
 
-class LoginViewController: UIViewController {
+  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet weak var contentView: UIView!
+
+  var scrollUtil: ScrollUtils!
 
   @IBOutlet weak var txtEmail: UITextField!
   @IBOutlet weak var txtPassword: UITextField!
   @IBOutlet weak var btnLogin: UIButton!
-
+  @IBOutlet weak var btnGoogleLogin: GIDSignInButton!
+  
   override func viewWillAppear(_ animated: Bool) {
     if let user = FIRAuth.auth()?.currentUser {
+      self.signedIn(user)
+    }
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    setupSocialSignIn()
+    scrollUtil = ScrollUtils.init(self, scrollView: self.scrollView)
+  }
+
+  // Sets up all of the supported Social Accounts
+  func setupSocialSignIn() {
+    GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+    GIDSignIn.sharedInstance().delegate = self
+    GIDSignIn.sharedInstance().uiDelegate = self
+  }
+
+  func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
+    if let error = error {
+      AppUtils.showErrorMessage(controller: self,
+                                message: error.localizedDescription)
+      return
+    }
+
+    guard let authentication = user.authentication else { return }
+    let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                      accessToken: authentication.accessToken)
+    FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+      if let error = error {
+        AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
+        return
+      }
       self.signedIn(user)
     }
   }

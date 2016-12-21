@@ -10,6 +10,8 @@ target 'ToDoList' do
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
   pod 'Firebase/Messaging'
+  pod 'GoogleSignIn'
+  pod 'Google/SignIn'
 
   target 'ToDoListTests' do
     inherit! :search_paths

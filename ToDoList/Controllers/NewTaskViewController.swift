@@ -14,7 +14,9 @@ import Firebase
 
 class NewTaskViewController: UIViewController {
   var dbRef: FIRDatabaseReference!
+  var scrollUtils: ScrollUtils!
 
+  @IBOutlet weak var scrollView: UIScrollView!
   @IBOutlet weak var txtTitle: UITextField!
   @IBOutlet weak var txtDescription: UITextField!
   @IBOutlet weak var pickerDueDate: UIDatePicker!
@@ -22,6 +24,7 @@ class NewTaskViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.dbRef = FIRDatabase.database().reference()
+    self.scrollUtils = ScrollUtils.init(self, scrollView: scrollView)
   }
 
   @IBOutlet weak var btnBack: UIButton!
@@ -55,4 +58,5 @@ class NewTaskViewController: UIViewController {
     self.txtDescription.text = ""
     self.pickerDueDate.setDate(Date(), animated: true)
   }
+
 }

@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
+
 class TaskCell: UITableViewCell {
 
   @IBOutlet weak var lblTitle: UILabel!
   @IBOutlet weak var lblDueDate: UILabel!
   @IBOutlet weak var lblDescription: UILabel!
+  @IBOutlet weak var lblCompleted: UILabel!
+  @IBOutlet weak var btnDone: UIButton!
 
 }

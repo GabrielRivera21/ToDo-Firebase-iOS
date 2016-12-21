@@ -11,6 +11,7 @@
 		7A05A73B1E00CD85008BCF45 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05A73A1E00CD85008BCF45 /* ToDoListViewController.swift */; };
 		7A05A73F1E01BB5A008BCF45 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A05A73E1E01BB5A008BCF45 /* LoginViewController.swift */; };
 		7A05A7411E021798008BCF45 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7A05A7401E021798008BCF45 /* GoogleService-Info.plist */; };
+		7A87BAB11E09E24900E7823F /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A87BAB01E09E24900E7823F /* UIUtils.swift */; };
 		7A8DEBBC1E08AE58008E2A0E /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8DEBBB1E08AE58008E2A0E /* TaskCell.swift */; };
 		7ABC76561E036FB1006EE37F /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC76551E036FB1006EE37F /* AppUtils.swift */; };
 		7ABC76581E046531006EE37F /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABC76571E046531006EE37F /* Task.swift */; };
@@ -54,6 +55,7 @@
 		7A05A73E1E01BB5A008BCF45 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Controllers/LoginViewController.swift; sourceTree = "<group>"; };
 		7A05A7401E021798008BCF45 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7A05A7491E035DE4008BCF45 /* ToDoList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoList.entitlements; sourceTree = "<group>"; };
+		7A87BAB01E09E24900E7823F /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIUtils.swift; path = Utils/UIUtils.swift; sourceTree = "<group>"; };
 		7A8DEBBB1E08AE58008E2A0E /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCell.swift; path = Controllers/Cells/TaskCell.swift; sourceTree = "<group>"; };
 		7ABC76551E036FB1006EE37F /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppUtils.swift; path = Utils/AppUtils.swift; sourceTree = "<group>"; };
 		7ABC76571E046531006EE37F /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Task.swift; path = Models/Task.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				7ABC76551E036FB1006EE37F /* AppUtils.swift */,
+				7A87BAB01E09E24900E7823F /* UIUtils.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				7A05A73F1E01BB5A008BCF45 /* LoginViewController.swift in Sources */,
 				7AC9E5291E008CB6009787E2 /* AppDelegate.swift in Sources */,
 				7A8DEBBC1E08AE58008E2A0E /* TaskCell.swift in Sources */,
+				7A87BAB11E09E24900E7823F /* UIUtils.swift in Sources */,
 				7ABC765E1E04A2ED006EE37F /* AppState.swift in Sources */,
 				7ABC76601E04A423006EE37F /* NewTaskViewController.swift in Sources */,
 				7A05A73B1E00CD85008BCF45 /* ToDoListViewController.swift in Sources */,

@@ -15,6 +15,7 @@ class Task: NSObject {
   var taskDescription: String
   var dueDate: Date
   var userId: String
+  var isCompleted: Bool
 
   // Firebase props
   var key: String?
@@ -25,6 +26,7 @@ class Task: NSObject {
     self.title = title
     self.taskDescription = taskDescription
     self.dueDate = dueDate
+    self.isCompleted = false
   }
 
   init(snapshot: FIRDataSnapshot) {
@@ -32,6 +34,7 @@ class Task: NSObject {
     self.title = snapshotValue["title"] as! String
     self.taskDescription = snapshotValue["description"] as! String
     self.userId = snapshotValue["userId"] as! String
+    self.isCompleted = snapshotValue["isCompleted"] as! Bool
 
     let dueDate = snapshotValue["dueDate"] as! String
     let dtFormat = DateFormatter()
@@ -43,11 +46,12 @@ class Task: NSObject {
   }
 
 
-  func toDictionary() -> Dictionary<String, String> {
+  func toDictionary() -> Dictionary<String, Any> {
     return ["userId": self.userId,
             "title": self.title,
             "description": self.taskDescription,
-            "dueDate": formatDate(self.dueDate)]
+            "dueDate": formatDate(self.dueDate),
+            "isCompleted": self.isCompleted]
   }
 
   func formatDate(_ date: Date) -> String {

@@ -12,6 +12,5 @@ struct Constants {
 
   struct Segues {
     static let ShowMainView = "ShowMainView"
-    static let UnwindSignOut = "UnwindSignOut"
   }
 }

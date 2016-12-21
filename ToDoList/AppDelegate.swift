@@ -12,13 +12,13 @@ import UserNotifications
 import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   let gcmMessageIDKey = "gcm.message_id"
-  let gcmMessageKey = "gcm.message"
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -37,6 +37,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     )
 
     return true
+  }
+  
+  @available(iOS 9.0, *)
+  func application(_ application: UIApplication, open url: URL,
+                   options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+    return GIDSignIn.sharedInstance().handle(
+      url,
+      sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+      annotation: [:]
+    )
+  }
+
+  func application(_ application: UIApplication, open url: URL,
+                   sourceApplication: String?, annotation: Any) -> Bool {
+    return GIDSignIn.sharedInstance().handle(
+      url,
+      sourceApplication: sourceApplication,
+      annotation: annotation
+    )
   }
 
   func registerForRemoteNotification(_ application: UIApplication) {
