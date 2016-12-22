@@ -20,12 +20,12 @@ class MainViewController: UIViewController, MainViewProtocol,
                           UITableViewDelegate, UITableViewDataSource {
 
   internal func getTable() -> UITableView {
-    print("Subclass has not implemented abstract method `shouldBeOverridden`!")
+    print("Subclass has not implemented abstract method `getTable`!")
     abort()
   }
 
   internal func getQuery() -> FIRDatabaseQuery {
-    print("Subclass has not implemented abstract method `shouldBeOverridden`!")
+    print("Subclass has not implemented abstract method `getQuery`!")
     abort()
   }
 
