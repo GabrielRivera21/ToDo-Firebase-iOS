@@ -18,6 +18,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
   @IBOutlet weak var contentView: UIView!
 
   var scrollUtil: ScrollUtils!
+  var dbRef: FIRDatabaseReference!
 
   @IBOutlet weak var txtEmail: UITextField!
   @IBOutlet weak var txtPassword: UITextField!
@@ -34,6 +35,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     super.viewDidLoad()
     setupSocialSignIn()
     scrollUtil = ScrollUtils.init(self, scrollView: self.scrollView)
+    self.dbRef = FIRDatabase.database().reference()
   }
 
   // Sets up all of the supported Social Accounts
@@ -45,8 +47,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
 
   func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
     if let error = error {
-      AppUtils.showErrorMessage(controller: self,
-                                message: error.localizedDescription)
+      AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
       return
     }
 
@@ -58,6 +59,7 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
         return
       }
+      self.createUserInDb(user)
       self.signedIn(user)
     }
   }
@@ -92,5 +94,14 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     guard txtEmail.text! != "" else { return "Please provide an email." }
     guard txtPassword.text != "" else { return "Please provide a Password" }
     return nil
+  }
+
+  func createUserInDb(_ user: FIRUser?) {
+    if let user = user {
+      let dbUser = User.init(id: user.uid, email: user.email!)
+      let userDict = dbUser.toDictionary()
+      let childUpdates = ["/users/\(user.uid)": userDict]
+      self.dbRef.updateChildValues(childUpdates)
+    }
   }
 }

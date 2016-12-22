@@ -22,11 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // register for remote notification
-    self.registerForRemoteNotification(application)
-
     // configure Firebase
     FIRApp.configure()
+
+    // register for remote notification
+    self.registerForRemoteNotification(application)
 
     // Add observer for InstanceID token refresh callback.
     NotificationCenter.default.addObserver(

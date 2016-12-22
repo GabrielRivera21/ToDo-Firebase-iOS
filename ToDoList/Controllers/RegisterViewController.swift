@@ -48,7 +48,7 @@ class RegisterViewController: UIViewController {
         AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
         return
       }
-
+      self.createUserInDb(user)
       AppUtils.showSuccessMessage(controller: self, message: "User \(email) has been created")
       self.dismiss(animated: true)
     }
@@ -65,6 +65,15 @@ class RegisterViewController: UIViewController {
     guard password1 == password2 else { return false }
     guard email.contains("@") else { return false }
     return true
+  }
+
+  func createUserInDb(_ user: FIRUser?) {
+    if let user = user {
+      let dbUser = User.init(id: user.uid, email: user.email!)
+      let userDict = dbUser.toDictionary()
+      let childUpdates = ["/users/\(user.uid)": userDict]
+      self.dbRef.updateChildValues(childUpdates)
+    }
   }
 
 }
