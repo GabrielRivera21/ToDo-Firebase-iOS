@@ -17,8 +17,6 @@ $ gem install cocoapods
 
 Then inside the project folder run the following command:
 
-Then, run the following command:
-
 ```bash
 $ pod install
 ```
