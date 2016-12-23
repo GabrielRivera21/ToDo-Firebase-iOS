@@ -12,6 +12,7 @@ target 'ToDoList' do
   pod 'Firebase/Messaging'
   pod 'GoogleSignIn'
   pod 'Google/SignIn'
+  pod 'SwiftSpinner'
 
   target 'ToDoListTests' do
     inherit! :search_paths

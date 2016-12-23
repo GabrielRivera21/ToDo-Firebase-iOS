@@ -11,6 +11,8 @@ import UIKit
 
 import Firebase
 
+import SwiftSpinner
+
 protocol MainViewProtocol {
   func getQuery() -> FIRDatabaseQuery
   func getTable() -> UITableView
@@ -89,7 +91,9 @@ class MainViewController: UIViewController, MainViewProtocol,
   func doneButtonClicked(_ sender: UIButton) {
     let task = self.taskList[sender.tag]
     let isCompleted = !task.isCompleted
+    SwiftSpinner.show("Updating...")
     task.updateDone(isCompleted, dbRef: self.dbRef)
+    SwiftSpinner.hide()
   }
 
   func signOut() {
@@ -171,8 +175,10 @@ class MainViewController: UIViewController, MainViewProtocol,
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle,
                  forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
+      SwiftSpinner.show("Deleting...")
       let taskItem = self.taskList[indexPath.row]
       taskItem.delete(dbRef: self.dbRef)
+      SwiftSpinner.hide()
     }
   }
 }

@@ -11,6 +11,9 @@ import UIKit
 
 import Firebase
 
+import SwiftSpinner
+
+
 class RegisterViewController: UIViewController {
 
   var dbRef: FIRDatabaseReference!
@@ -42,8 +45,11 @@ class RegisterViewController: UIViewController {
       return
     }
 
+    SwiftSpinner.show("Registering User...")
+
     // create the user
     FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
+      SwiftSpinner.hide()
       if let error = error {
         AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
         return

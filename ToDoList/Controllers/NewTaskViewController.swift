@@ -11,6 +11,7 @@ import UIKit
 
 import Firebase
 
+import SwiftSpinner
 
 class NewTaskViewController: UIViewController {
   var dbRef: FIRDatabaseReference!
@@ -48,7 +49,10 @@ class NewTaskViewController: UIViewController {
     let childUpdates = ["/tasks/\(key)": taskDict,
                         "/user-tasks/\(userID!)/\(key)": taskDict]
 
+    SwiftSpinner.show("Creating Task...")
     self.dbRef.updateChildValues(childUpdates)
+    SwiftSpinner.hide()
+
     self.resetForm()
     self.dismiss(animated: true)
   }

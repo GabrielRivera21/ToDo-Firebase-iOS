@@ -12,6 +12,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
+import SwiftSpinner
+
 class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate {
 
   @IBOutlet weak var scrollView: UIScrollView!
@@ -54,7 +56,11 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
     guard let authentication = user.authentication else { return }
     let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                       accessToken: authentication.accessToken)
+
+    SwiftSpinner.show("Logging in...")
+
     FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+      SwiftSpinner.hide()
       if let error = error {
         AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
         return
@@ -74,8 +80,11 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
       return
     }
 
+    SwiftSpinner.show("Logging in...")
+
     // login
     FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
+      SwiftSpinner.hide()
       if let error = error {
         AppUtils.showErrorMessage(controller: self, message: error.localizedDescription)
         return
